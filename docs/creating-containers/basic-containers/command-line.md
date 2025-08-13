@@ -146,6 +146,78 @@ Once the container creation process is complete, your container will be accessib
 ssh -p <your-container-port> <proxmox-username>@opensource.mieweb.org
 ```
 
+## 9. Understanding the Output
+
+Once your container is created, you will receieve an output that looks somthing like this:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔔  COPY THESE PORTS DOWN — For External Access
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌  Note: Your container listens on SSH Port 22 internally,
+    but EXTERNAL traffic must use the SSH port listed below:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅  Hostname Registration: max-demo-container → 10.15.19.181
+🔐  SSH Port               : 2376
+🌐  HTTP Port              : 3000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦  Container ID        : 116
+🌐  Internal IP         : 10.15.19.181
+🔗  Domain Name         : https://max-demo-container.opensource.mieweb.org
+🛠️  SSH Access          : ssh -p 2376 demouser@max-demo-container.opensource.mieweb.org
+🔑  Container Password  : Your proxmox account password
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NOTE: Additional background scripts are being ran in detached terminal sessions.
+Wait up to two minutes for all processes to complete.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Still not working? Contact Max K. at maxklema@gmail.com
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+:::important Important
+Your container password is the same as your Proxmox Account Password.
+:::
+
+The first block will list all of the ports that your container uses. By default, it will display an SSH Port and an HTTP Port. If you added any other special protocols, they will appear there as well.
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅  Hostname Registration: max-demo-container → 10.15.19.181
+🔐  SSH Port               : 2376
+🌐  HTTP Port              : 3000
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+The second block contains network information about your container specifically, including its IP address, public domain name, and ssh command:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦  Container ID        : 116
+🌐  Internal IP         : 10.15.19.181
+🔗  Domain Name         : https://max-demo-container.opensource.mieweb.org
+🛠️  SSH Access          : ssh -p 2376 demouser@max-demo-container.opensource.mieweb.org
+🔑  Container Password  : Your proxmox account password
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+:::note Note
+The IP that is given is an **internal IP** allocated by our local DHCP server. It is not public. Additionally, since we are setting up a basic container, nothing will be deployed yet, so navigating to the domain will return a 502 bad gateway error from our nginx server. This is expected.
+:::
+
+:::warning Warning
+Save your SSH port number, as well as any port numbers, because you will not be able to see them again. This will be fixed at a later time.
+:::
+
+## 10. Viewing your Container on Proxmox
+
+To see your container on the Proxmox GUI, navigate to [https://opensource.mieweb.org:8006](https://opensource.mieweb.org:8006). Once signed in, on the summary view, you should see the name of your container. If you double click on it, you will be able to access details, like the shell, metrics, and other network/filesystem information.
+
+![Hostname](img/proxmox-lxc.jpg)
+
+:::note Note
+As of writing, you are able to reboot, start, and shutdown your container as you please. However, you must reach out to a cluster admin to delete your container.
+:::
+
 ---
 
 **Advanced Options**: For multi-component deployments, custom environment variables, or specific service configurations, refer to the [Advanced Container Configuration](/docs/creating-containers/advanced-configuration) documentation or contact the MIE team.
