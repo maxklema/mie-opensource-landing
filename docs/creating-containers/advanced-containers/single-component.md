@@ -22,7 +22,7 @@ Do you want to deploy your project automatically? (y/n) →
 
 Answer `y` to begin the deployment configuration process.
 
-## Step 1: Repository Information
+## 1: Repository Information
 
 ### Project Repository
 ```
@@ -59,7 +59,7 @@ Enter the project root directory (relative to repository root directory, or leav
 
 **Validation:** The script confirms the directory exists in your repository.
 
-## Step 2: Component Configuration
+## 2: Component Configuration
 
 ### Multi-Component Check
 ```
@@ -68,7 +68,7 @@ Does your app consist of multiple components that run independently, i.e. separa
 
 **For single-component applications, answer `n` or leave blank.**
 
-## Step 3: Environment Variables (Optional)
+## 3: Environment Variables (Optional)
 
 ```
 Does your application require environment variables? (y/n) →  
@@ -92,7 +92,7 @@ Do you want to enter another Environment Variable? (y/n) →
 - Both key and value are required (cannot be empty)
 - Continue adding variables or press Enter when finished
 
-## Step 4: Build Commands (Optional)
+## 4: Build Commands (Optional)
 
 ```
 Enter the build command (leave blank if no build command) →  
@@ -105,7 +105,7 @@ Enter the build command (leave blank if no build command) →
 
 **Leave blank if:** Your application doesn't require a build step.
 
-## Step 5: Install Commands (Required)
+## 5: Install Commands (Required)
 
 ```
 Enter the install command (e.g., 'npm install') →  
@@ -121,7 +121,7 @@ If you are deploying a component that is made in Python, and you have a `require
 
 **This step is required** - your application must have an install command.
 
-## Step 6: Start Commands (Required)
+## 6: Start Commands (Required)
 
 ```
 Enter the start command (e.g., 'npm start', 'python app.py') →  
@@ -142,7 +142,7 @@ Many applications, by default, run HTTP/HTTPS services on 127.0.0.1 (localhost).
 If your application is a meteor application, you must include the flag --allow-superuser to run your application.
 :::
 
-## Step 7: Runtime Environment (Required)
+## 7: Runtime Environment (Required)
 
 ```
 Enter the underlying runtime environment for your project (e.g., 'nodejs', 'python') →  
@@ -156,7 +156,7 @@ Enter the underlying runtime environment for your project (e.g., 'nodejs', 'pyth
 Only `nodejs` and `python` are currently supported.
 :::
 
-## Step 8: Services (Optional)
+## 8: Services (Optional)
 
 ```
 Does your application require special services (i.e. Docker, MongoDB, etc.) to run on the container? (y/n) →  
@@ -208,7 +208,7 @@ sudo systemctl start nginx
 Make sure you enable and start your service using the systemctl service manager CLI.
 :::
 
-## Step 9: Automatic Deployment
+## 9: Automatic Deployment
 
 After providing all information, the system automatically:
 
