@@ -6,6 +6,10 @@ sidebar_position: 1
 
 The MIE Opensource Proxmox Cluster provides automated container deployment capabilities, allowing you to deploy applications directly from GitHub repositories without manual setup. This automation eliminates the need to SSH into containers, manually install dependencies, configure services, and start applications.
 
+:::note Note
+As of writing (8/14/25), automatic deploy only supports components that run on either a `nodejs` or `python` runtime environment.
+:::
+
 ## Single vs Multi-Component Applications
 
 ### Single Component Applications
