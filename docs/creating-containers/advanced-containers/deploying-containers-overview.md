@@ -75,7 +75,7 @@ See the documentation for deploying multi-component applications [here](/docs/cr
 - **GitHub Integration**: Deploy directly from your repository with Proxmox Launchpad
 
 :::note Note
-It is recommended to deploy your application on a test container via the command line first before working with [Proxmox Launchpad](/).
+It is recommended to deploy your application on a test container via the command line first before working with [Proxmox Launchpad](/docs/category/proxmox-launchpad).
 :::
 
 
