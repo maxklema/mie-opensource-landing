@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Using The Web GUI
+# Using a Web GUI
 :::note Note
 This walkthrough assumes that you already have a registered proxmox account in the cluster. If not, see [Introduction](/docs/intro.md).
 :::
