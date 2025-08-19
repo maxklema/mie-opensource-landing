@@ -8,7 +8,7 @@ This guide covers **Path 1** of Proxmox Launchpad: using your own GitHub self-ho
 
 :::tip Why Path 1 is Recommended
 - **No GitHub PAT required** - Enhanced security
-- **Faster execution** - No runner provisioning overhead  
+- **Faster execution** - No runner provisioning overhead
 - **Full control** - Use your preferred runner environment
 - **Simpler setup** - Fewer configuration steps
 :::
@@ -42,7 +42,7 @@ All Proxmox Launchpad workflows must include these trigger events:
 ```yaml
 on:
   push:     # Updates existing containers
-  create:   # Creates containers for new branches  
+  create:   # Creates containers for new branches
   delete:   # Removes containers when branches are deleted
 ```
 
@@ -64,7 +64,7 @@ jobs:
     steps:
       - uses: maxklema/proxmox-launchpad@main
         with:
-          proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+          proxmox_username: your-username
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
 ```
 
@@ -79,15 +79,15 @@ Configure your container's fundamental settings:
 ```yaml
 - uses: maxklema/proxmox-launchpad@main
   with:
-    proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+    proxmox_username: your-username
     proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-    
+
     # Optional: HTTP port (default: 3000)
     http_port: 8080
-    
+
     # Optional: Linux distribution (default: debian)
     linux_distribution: debian  # Options: debian, rocky
-    
+
     # Optional: SSH public key for passwordless access
     public_key: ${{ secrets.SSH_PUBLIC_KEY }}
 ```
@@ -135,37 +135,24 @@ For applications with a single service (React app, Flask server, etc.):
 ```yaml
 - uses: maxklema/proxmox-launchpad@main
   with:
-    proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+    proxmox_username: your-username
     proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-    
+
     # Deployment configuration
     project_root: ""  # Leave blank for repository root
     install_command: "npm install"
     start_command: "npm start"
     runtime_language: "nodejs"
-    
+
     # Optional: Build command
     build_command: "npm run build"
-    
+
     # Optional: Environment variables
     container_env_vars: '{"API_KEY": "your-api-key", "NODE_ENV": "production"}'
-    
+
     # Optional: Services
     services: '["mongodb", "redis"]'
 ```
-
-#### Single-Component Properties
-
-| Property | Required | Description | Example |
-|----------|----------|-------------|---------|
-| `project_root` | No | Project subdirectory (blank = repository root) | `""` or `"/backend"` |
-| `install_command` | Yes* | Command to install dependencies | `"npm install"`, `"pip install -r requirements.txt"` |
-| `start_command` | Yes* | Command to start your application | `"npm start"`, `"python app.py"` |
-| `runtime_language` | Yes* | Runtime environment | `"nodejs"` or `"python"` |
-| `build_command` | No | Command to build your project | `"npm run build"`, `"python setup.py build"` |
-| `container_env_vars` | No | Environment variables as JSON object | `'{"API_KEY": "123", "DEBUG": "true"}'` |
-
-*Required only if using automatic deployment
 
 ### Multi-Component Applications
 
@@ -174,20 +161,20 @@ For applications with multiple services (frontend + backend, microservices, etc.
 ```yaml
 - uses: maxklema/proxmox-launchpad@main
   with:
-    proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+    proxmox_username: your-username
     proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-    
+
     # Multi-component configuration
     install_command: '{"/frontend": "npm install", "/backend": "pip install -r requirements.txt"}'
     start_command: '{"/frontend": "npm start", "/backend": "flask run --host=0.0.0.0"}'
     runtime_language: '{"/frontend": "nodejs", "/backend": "python"}'
-    
+
     # Optional: Build commands per component
     build_command: '{"/frontend": "npm run build", "/backend": "python setup.py build"}'
-    
+
     # Optional: Environment variables per component
     container_env_vars: '{"/frontend": {"REACT_APP_API_URL": "http://localhost:5000"}, "/backend": {"FLASK_ENV": "production"}}'
-    
+
     # Optional: Root directory command (e.g., Docker Compose)
     root_start_command: "docker-compose up -d"
 ```
@@ -198,14 +185,28 @@ Each component path is relative to your project root:
 
 ```
 your-repo/
-├── frontend/          # Component path: "/frontend"
+├── frontend/          # Component path: "frontend/"
 │   ├── package.json
 │   └── src/
-├── backend/           # Component path: "/backend"  
+├── backend/           # Component path: "backend/"
 │   ├── requirements.txt
 │   └── app.py
 └── docker-compose.yml # Root commands run here
 ```
+
+### Automatic Deployment Properties
+
+| Propety | Required? | Description | Single Component | Multi-Component |
+| --------- | ----- |  ------------------------------------ | ---- | --- |
+|  `multi_component` | Conditional | A `y` flag that specifies if your application is multi-component. This only needs to be set if your application is multi-component. | N/A | A string of `y`.
+|  `container_env_vars` | No. | Key-Value Environment variable pairs. | Dictionary in the form of: `{ "api_key": "123", "password": "abc"}` | Dictionary in the form of: `'{"/frontend": { "api_key": "123"}, "/backend": { "password": "abc123" }}'`.
+|  `install_command` | Yes* | Commands to install all project dependencies | String of the installation command, i.e. `npm install`. | Dictionary in the form of: `'{"/frontend": "npm install", "/backend": "pip install -r ../requirements.txt"}'`.
+|  `build_command` | No | Commands to build project components | String of the build command, i.e. `npm build`. | Dictionary in the form of: `'{"/frontend": "npm build", "/backend": "python3 build.py"}'`.
+|  `start_command` | Yes* | Commands to start project components. | String of the start command, i.e. `npm run`. | Dictionary in the form of: `'{"/frontend": "npm run", "/backend": "flask run"}'`.
+|  `runtime_language` | Yes* | Runtime language of each project component, which can either be `nodejs` or `python`. | String of runtime environment, i.e. `nodejs` | Dictionary in the form of: `'{"/frontend": "nodejs", "/backend": "python"}'`.
+|  `root_start_command` | No | Command to run at the project directory root for **multi-component applications**. | N/A | String of the command, i.e. `Docker-compose up ...`
+
+> * (*) These options are only required if `root_start_command` is not provided, as that command may be a docker build and/or a docker compose command that builds the entire application.
 
 ### Services Configuration
 
@@ -271,20 +272,20 @@ jobs:
     steps:
       - uses: maxklema/proxmox-launchpad@main
         with:
-          proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+          proxmox_username: your-username
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-          
+
           # Container settings
           http_port: 3000
           linux_distribution: debian
-          
+
           # Application deployment
           install_command: "npm install"
           build_command: "npm run build"
           start_command: "npm start"
           runtime_language: "nodejs"
-          
+
           # Environment and services
           container_env_vars: '{"REACT_APP_API_URL": "http://0.0.0.0:5000", "NODE_ENV": "production"}'
           services: '["mongodb"]'
@@ -306,19 +307,19 @@ jobs:
     steps:
       - uses: maxklema/proxmox-launchpad@main
         with:
-          proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+          proxmox_username: your-username
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
           public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-          
+
           # Multi-component configuration
           install_command: '{"/client": "npm install", "/server": "pip install -r requirements.txt"}'
           build_command: '{"/client": "npm run build"}'
           start_command: '{"/client": "npm start", "/server": "flask run --host=0.0.0.0 --port=5000"}'
           runtime_language: '{"/client": "nodejs", "/server": "python"}'
-          
+
           # Environment variables per component
           container_env_vars: '{"/client": {"REACT_APP_API_URL": "http://0.0.0.0:5000"}, "/server": {"FLASK_ENV": "production", "DATABASE_URL": "mongodb://localhost:27017/myapp"}}'
-          
+
           # Services for the application
           services: '["mongodb", "redis"]'
 ```
@@ -339,17 +340,17 @@ jobs:
     steps:
       - uses: maxklema/proxmox-launchpad@main
         with:
-          proxmox_username: ${{ secrets.PROXMOX_USERNAME }}
+          proxmox_username: your-username
           proxmox_password: ${{ secrets.PROXMOX_PASSWORD }}
-          
+
           # Use Docker Compose for orchestration
           root_start_command: "docker-compose up -d"
-          
+
           # Individual service configuration
           install_command: '{"/api": "npm install", "/worker": "pip install -r requirements.txt"}'
           start_command: '{"/api": "npm start", "/worker": "python worker.py"}'
           runtime_language: '{"/api": "nodejs", "/worker": "python"}'
-          
+
           # Docker and database services
           services: '["docker", "postgresql", "redis"]'
 ```
@@ -367,7 +368,7 @@ Ensure your backend services bind to `0.0.0.0` (all interfaces) instead of `127.
 # Flask - Correct
 app.run(host='0.0.0.0', port=5000)
 
-# Flask - Incorrect  
+# Flask - Incorrect
 app.run(host='127.0.0.1', port=5000)
 ```
 
@@ -390,6 +391,21 @@ start_command: "meteor --allow-superuser --port 0.0.0.0:3000"
 Meteor is a large package and may take additional time to install and deploy.
 :::
 
+#### Vite.js Applications
+
+If you are using vite.js as a frontend service, you need to add the domain name of your container in the allowHosts array in your `vite.config.js` file.
+
+```yml
+server: {
+    host: '0.0.0.0',
+    port: 32000,
+    proxy: {
+      '/api': 'http://localhost:5000',
+    },
+    allowedHosts: ['maxklema-polyglot-test-main.opensource.mieweb.org']
+  },
+```
+
 ### Environment Variables
 
 Environment variables are automatically written to `.env` files in the appropriate component directories:
@@ -406,7 +422,7 @@ After successful deployment, you'll receive output like:
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Hostname Registration: my-app-main → 10.15.129.23
-SSH Port               : 2344  
+SSH Port               : 2344
 HTTP Port              : 3000
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Container ID        : 136
@@ -488,4 +504,3 @@ tmux attach -t 0
 ---
 
 **Next Steps**: Learn about [Path 2: Automatic Runner Provisioning](/docs/proxmox-launchpad/automatic-runners) or explore [Configuration Examples](/docs/proxmox-launchpad/automatic-runner-provisioning) for automatically provisioning your runners.
-
