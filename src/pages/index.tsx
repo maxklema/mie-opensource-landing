@@ -3,7 +3,6 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import NavButton from "@site/src/components/NavButton";
@@ -15,6 +14,7 @@ import { Button } from "@vaadin/react-components/Button.js";
 import { Icon } from "@vaadin/react-components/Icon.js";
 import '@vaadin/icons';
 import { HorizontalLayout } from '@vaadin/react-components/HorizontalLayout.js'; // Example for layout
+import { GrGithub } from "react-icons/gr";
 
 
 function HomepageHeader() {
@@ -58,7 +58,7 @@ function ProjectShowcase() {
 
     useEffect(() => {
         const fetchProjectDetails = async () => {
-            const projectsToShowCase = ["vistamate", "mieweb-timeharbor-main", "rankroom", "mieapi-mcp-server"];
+            const projectsToShowCase = ["vistamate", "mieweb-timeharbor-main", "landing-page", "lattln-questionnaire-builder-main", "mieapi-mcp-server", "rankroom",];
             
             try {
                 const promises = projectsToShowCase.map(async (project) => {
@@ -108,6 +108,10 @@ function ProjectShowcase() {
         );
     }
 
+    const handleClick = (href: string) => {
+        window.open(href, '_blank');
+    }
+
     return (
         <div className={styles.projectShowcase}>
             <Heading as="h2" className={styles.projectTitle}>Featured Projects</Heading>
@@ -115,15 +119,22 @@ function ProjectShowcase() {
             <div className={styles.projectGrid}>
                 {projectDetails.map((project) => (
                     <div key={project.name} className={styles.projectCard}>
-                        <h3>{project.name}</h3>
-                        <p>{project.description}</p>
-                        <p>Author: {project.author}</p>
-                        <a href={project.projectURL} target="_blank" rel="noopener noreferrer">
-                            View Project
-                        </a>
+                        <div className={styles.projectHeader}>
+                            <div className={styles.projectInfo}>
+                                <h3 className={styles.projectName}>{project.name}</h3>
+                                <p className={styles.projectAuthor}>{project.author}</p>
+                            </div>
+                            <GrGithub size={24} color="black" onClick={() => handleClick("https://github.com/mieweb")} />
+                        </div>
+                        <p className={styles.projectDescription}>{project.description}</p>
+                        <Button theme="tertiary-inline" onClick={() => handleClick(project.projectURL)}>View Project</Button>
                     </div>
                 ))}
             </div>
+            <Button>
+                View all Projects
+                <Icon icon="vaadin:arrow-right" slot={'suffix'} />
+            </Button>
         </div>
     );
 }
@@ -137,7 +148,6 @@ export default function Home(): ReactNode {
         >
             <HomepageHeader />
             <main>
-                <HomepageFeatures />
                 <ProjectShowcase />
             </main>
         </Layout>
