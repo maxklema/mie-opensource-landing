@@ -5,6 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "proxy": "node proxy-server.js",
+    "dev": "concurrently \"npm run proxy\" \"npm run start -- --host 0.0.0.0\"",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -25,6 +27,9 @@
     "animated-backgrounds": "^2.0.0",
     "beautiful-backgrounds": "^0.0.7",
     "clsx": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -33,6 +38,7 @@
     "@docusaurus/module-type-aliases": "3.8.1",
     "@docusaurus/tsconfig": "3.8.1",
     "@docusaurus/types": "3.8.1",
+    "concurrently": "^9.2.0",
     "typescript": "~5.6.2"
   },
   "browserslist": {

@@ -28,6 +28,10 @@ const config: Config = {
         locales: ["en"],
     },
 
+    plugins: [
+       require.resolve("./plugins/webpack")
+    ],
+
     presets: [
         [
             "classic",
