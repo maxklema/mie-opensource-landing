@@ -17,7 +17,11 @@
   "dependencies": {
     "@docusaurus/core": "3.8.1",
     "@docusaurus/preset-classic": "3.8.1",
+    "@material/button": "^14.0.0",
     "@mdx-js/react": "^3.0.0",
+    "@vaadin/button": "^24.8.5",
+    "@vaadin/icons": "^24.8.5",
+    "@vaadin/react-components": "^24.8.0",
     "animated-backgrounds": "^2.0.0",
     "beautiful-backgrounds": "^0.0.7",
     "clsx": "^2.0.0",
