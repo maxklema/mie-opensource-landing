@@ -36,7 +36,7 @@ const config: Config = {
                     sidebarPath: "./sidebars.ts",
                     editUrl:
                         "https://github.com/maxklema/mie-opensource-landing/tree/master/",
-                },
+                }
                
             } satisfies Preset.Options,
         ],
