@@ -3,11 +3,10 @@ import clsx from "clsx";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import styles from "./index.module.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import ProjectGrid from "@site/src/components/projectGrid";
 import Heading from "@theme/Heading";
-import { Button } from "@vaadin/react-components";
 import Link from "@docusaurus/Link";
 
 function HomepageHeader() {
@@ -63,7 +62,7 @@ export default function Home(): ReactNode {
                         return (
                             <div className={styles.projectShowcase}>
                                 <Heading as="h2" className={styles.projectTitle}>Featured Projects</Heading>
-                                <p className={styles.projectDescription}>Explore our latest open source projects and contributions.</p>
+                                <p>Explore some of our open source projects and contributions.</p>
                                     <ProjectGrid />
                                 <Link to="/projects" style={{ textDecoration: 'none' }}>
                                     <Button theme="primary">
