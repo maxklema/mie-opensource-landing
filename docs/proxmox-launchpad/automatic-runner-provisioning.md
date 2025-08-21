@@ -657,4 +657,4 @@ If you're uncomfortable sharing your PAT:
 
 ---
 
-**Next Steps**: Explore [Path 1: Supplied Runners](/docs/proxmox-launchpad/supplied-runners) for a more secure alternative, or review [Configuration Examples](/docs/proxmox-launchpad/examples) for advanced setups.
+**Next Steps**: Explore [Path 1: Supplied Runners](/docs/proxmox-launchpad/supplied-runners) for a more secure alternative.

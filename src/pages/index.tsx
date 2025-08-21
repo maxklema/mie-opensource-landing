@@ -7,15 +7,10 @@ import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import NavButton from "@site/src/components/NavButton";
 import React, { useEffect, useState } from "react";
-
-// Vaadin components
-
-import { Button } from "@vaadin/react-components/Button.js";
-import { Icon } from "@vaadin/react-components/Icon.js";
-import '@vaadin/icons';
-import { HorizontalLayout } from '@vaadin/react-components/HorizontalLayout.js'; // Example for layout
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import { GrGithub } from "react-icons/gr";
 
+// Vaadin components
 
 function HomepageHeader() {
     return (
@@ -25,18 +20,27 @@ function HomepageHeader() {
                 <div>
                     <h1 className={styles.heroTitle}>Opensource at MIE</h1>
                     <p className={styles.heroParagraph}>Empowering collaboration and innovation through open source, one commit at a time</p>
-                    <HorizontalLayout theme="spacing" className={styles.buttons}>
-                        <NavButton 
-                            href="/" 
-                            icon="vaadin:cubes" 
-                            text="Projects" 
-                        />
-                        <NavButton 
-                            href="/docs/intro" 
-                            icon="vaadin:arrow-right" 
-                            text="Getting Started" 
-                        />
-                    </HorizontalLayout>
+                    <BrowserOnly fallback={<div>Loading buttons...</div>}>
+                        {() => {
+                            const { HorizontalLayout } = require('@vaadin/react-components/HorizontalLayout.js');
+                            const NavButton = require("@site/src/components/NavButton").default;
+                            
+                            return (
+                                <HorizontalLayout theme="spacing" className={styles.buttons}>
+                                    <NavButton 
+                                        href="/" 
+                                        icon="vaadin:cubes" 
+                                        text="Projects" 
+                                    />
+                                    <NavButton 
+                                        href="/docs/intro" 
+                                        icon="vaadin:arrow-right" 
+                                        text="Getting Started" 
+                                    />
+                                </HorizontalLayout>
+                            );
+                        }}
+                    </BrowserOnly>
                 </div>
             </div>
         </header>
@@ -62,7 +66,7 @@ function ProjectShowcase() {
             
             try {
                 const promises = projectsToShowCase.map(async (project) => {
-                    const response = await fetch(`http://localhost:3001/api/projects/${project}`);
+                    const response = await fetch(`/api/projects/${project}`);
 
                     if (!response.ok) {
                         throw new Error(`Failed to fetch ${project}`);
@@ -108,34 +112,46 @@ function ProjectShowcase() {
         );
     }
 
-    const handleClick = (href: string) => {
-        window.open(href, '_blank');
-    }
-
     return (
-        <div className={styles.projectShowcase}>
-            <Heading as="h2" className={styles.projectTitle}>Featured Projects</Heading>
-            <p className={styles.projectDescription}>Explore our latest open source projects and contributions.</p>
-            <div className={styles.projectGrid}>
-                {projectDetails.map((project) => (
-                    <div key={project.name} className={styles.projectCard}>
-                        <div className={styles.projectHeader}>
-                            <div className={styles.projectInfo}>
-                                <h3 className={styles.projectName}>{project.name}</h3>
-                                <p className={styles.projectAuthor}>{project.author}</p>
-                            </div>
-                            <GrGithub size={24} color="black" onClick={() => handleClick("https://github.com/mieweb")} />
+        <BrowserOnly fallback={<div>Loading projects...</div>}>
+            {() => {
+                const { Button } = require("@vaadin/react-components/Button.js");
+                const { Icon } = require("@vaadin/react-components/Icon.js");
+                require('@vaadin/icons');
+                
+                return (
+                    <div className={styles.projectShowcase}>
+                        <Heading as="h2" className={styles.projectTitle}>Featured Projects</Heading>
+                        <p className={styles.projectDescription}>Explore our latest open source projects and contributions.</p>
+                        <div className={styles.projectGrid}>
+                            {projectDetails.map((project) => (
+                                <div key={project.name} className={styles.projectCard}>
+                                    <div className={styles.projectHeader}>
+                                        <div className={styles.projectInfo}>
+                                            <h3 className={styles.projectName}>{project.name}</h3>
+                                            <p className={styles.projectAuthor}>{project.author}</p>
+                                        </div>
+                                        <Link to={"https://github.com/mieweb"} style={{ textDecoration: 'none' }}>
+                                            <GrGithub size={24} color="black" />
+                                        </Link>
+                                    </div>
+                                    <p className={styles.projectDescription}>{project.description}</p>
+                                    <Link to={project.projectURL} style={{ textDecoration: 'none' }}>
+                                        <Button theme="tertiary-inline">
+                                            View Project
+                                        </Button>
+                                    </Link>
+                                </div>
+                            ))}
                         </div>
-                        <p className={styles.projectDescription}>{project.description}</p>
-                        <Button theme="tertiary-inline" onClick={() => handleClick(project.projectURL)}>View Project</Button>
+                        <Button>
+                            View all Projects
+                            <Icon icon="vaadin:arrow-right" slot={'suffix'} />
+                        </Button>
                     </div>
-                ))}
-            </div>
-            <Button>
-                View all Projects
-                <Icon icon="vaadin:arrow-right" slot={'suffix'} />
-            </Button>
-        </div>
+                );
+            }}
+        </BrowserOnly>
     );
 }
 

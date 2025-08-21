@@ -37,21 +37,7 @@ const config: Config = {
                     editUrl:
                         "https://github.com/maxklema/mie-opensource-landing/tree/master/",
                 },
-                blog: {
-                    showReadingTime: true,
-                    feedOptions: {
-                        type: ["rss", "atom"],
-                        xslt: true,
-                    },
-                    editUrl:
-                        "https://github.com/maxklema/mie-opensource-landing/tree/master/",
-                    onInlineTags: "warn",
-                    onInlineAuthors: "warn",
-                    onUntruncatedBlogPosts: "warn",
-                },
-                theme: {
-                    customCss: "./src/css/custom.css",
-                },
+               
             } satisfies Preset.Options,
         ],
     ],
@@ -110,10 +96,6 @@ const config: Config = {
                 {
                     title: "More",
                     items: [
-                        {
-                            label: "Blog",
-                            to: "/blog",
-                        },
                         {
                             label: "GitHub",
                             href: "https://github.com/maxklema/mie-opensource-landing",

@@ -220,4 +220,4 @@ As of writing, you are able to reboot, start, and shutdown your container as you
 
 ---
 
-**Advanced Options**: For multi-component deployments, custom environment variables, or specific service configurations, refer to the [Advanced Container Configuration](/docs/creating-containers/advanced-configuration) documentation or contact the MIE team.
+**Advanced Options**: For multi-component deployments, custom environment variables, or specific service configurations, refer to the [Advanced Container Configuration](/docs/category/creating-advanced-containers) documentation or contact the MIE team.

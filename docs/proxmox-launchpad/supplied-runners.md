@@ -503,4 +503,4 @@ tmux attach -t 0
 
 ---
 
-**Next Steps**: Learn about [Path 2: Automatic Runner Provisioning](/docs/proxmox-launchpad/automatic-runners) or explore [Configuration Examples](/docs/proxmox-launchpad/automatic-runner-provisioning) for automatically provisioning your runners.
+**Next Steps**: Learn about [Path 2: Automatic Runner Provisioning](/docs/proxmox-launchpad/automatic-runner-provisioning) for automatically provisioning your runners.

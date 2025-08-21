@@ -25,7 +25,7 @@ If you don't have an account yet, please contact the MIE team to request access 
 Our documentation covers everything you need to work with the cluster:
 
 ### New to Proxmox?
-**[Introduction to Proxmox →](/docs/proxmox-introduction/proxmox-introduction)**
+**[Introduction to Proxmox →](/docs/proxmox-introduction)**
 
 Learn the fundamentals of Proxmox Virtual Environment (VE), understand the interface, and discover how virtualization works in our cluster environment.
 
