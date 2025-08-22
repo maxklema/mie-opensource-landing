@@ -3,6 +3,7 @@ import { Button } from "@vaadin/react-components/Button.js";
 import { Icon } from "@vaadin/react-components/Icon.js";
 import '@vaadin/icons';
 import Link from '@docusaurus/Link';
+import styles from './index.module.css';
 
 interface NavButtonProps {
     href: string;
@@ -14,7 +15,7 @@ interface NavButtonProps {
 export default function NavButton({ href, icon, text, theme = "primary" }: NavButtonProps) {
     return (
         <Link to={href} style={{ textDecoration: 'none' }}>
-            <Button theme={theme}>
+            <Button className={styles.Button} theme={theme}>
                 <Icon icon={icon} slot="prefix" />
                 {text}
             </Button>

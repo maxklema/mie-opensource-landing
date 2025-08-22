@@ -188,7 +188,7 @@ export default function ProjectGrid({ ProjectList, itemsPerPage }: ProjectGridPr
                                     </div>
                                     <p className={styles.projectDescription}>{project.description}</p>
                                     <Link to={project.projectURL} style={{ textDecoration: 'none' }}>
-                                        <Button theme="tertiary-inline" style={{
+                                        <Button className={styles.Button} theme="tertiary-inline" style={{
                                             color: theme === 'dark' ? 'var(--ifm-color-primary-light)' : 'var(--ifm-color-primary)',
                                         }}>
                                             View Project

@@ -52,6 +52,16 @@ const config: Config = {
             },
             items: [
                 {
+                    to: "/projects",
+                    label: "Projects",
+                    position: "left",
+                },
+                {
+                    to: "https://create-a-container.opensource.mieweb.org",
+                    label: "Create a Container",
+                    position: "left",
+                },
+                {
                     type: "docSidebar",
                     sidebarId: "tutorialSidebar",
                     position: "left",
@@ -65,14 +75,81 @@ const config: Config = {
             ],
         },
         footer: {
-            style: "dark",
+            style: "light",
             links: [
                 {
                     title: "Docs",
                     items: [
                         {
-                            label: "Tutorial",
+                            label: "Introduction",
                             to: "/docs/intro",
+                        },
+                        {
+                            label: "Proxmox",
+                            to: "/docs/category/introduction-to-proxmox"
+                        },
+                        {
+                            label: "Creating Containers",
+                            to: "/docs/creating-containers/basic-containers/web-gui",
+                        },
+                        {
+                            label: "Proxmox Launchpad",
+                            to: "/docs/proxmox-launchpad/what-is-proxmox-launchpad",
+                        },
+                        {
+                            label: "Monitoring Containers",
+                            to: "/docs/monitoring-container",
+                        },
+                        {
+                            label: "VSCode Integration",
+                            to: "/docs/vscode-setup",
+                        },
+                    ],
+                },
+                {
+                    title: "Resources",
+                    items: [
+                        {
+                            label: "Site Source",
+                            href: "https://github.com/maxklema/mie-opensource-landing",
+                        },
+                        {
+                            label: "Opensource Cluster Source",
+                            href: "https://github.com/mieweb/opensource-server",
+                        },
+                        {
+                            label: "Proxmox Launchpad Source",
+                            href: "https://github.com/maxklema/proxmox-launchpad",
+                        },
+                        {
+                            label: "Mieweb Github Organization",
+                            href: "https://github.com/mieweb",
+                        },
+
+                    ],
+                },
+                 {
+                    title: "Company",
+                    items: [
+                        {
+                            label: "About Us",
+                            href: "https://mieweb.org/about",
+                        },
+                        {
+                            label: "Careers",
+                            href: "https://mieweb.org/join-our-team",
+                        },
+                        {
+                            label: "Our Team",
+                            href: "https://mieweb.org/our-team",
+                        },
+                        {
+                            label: "Privacy Policy",
+                            href: "https://mieweb.org/privacy",
+                        },
+                        {
+                            label: "Terms and Conditions of Use",
+                            href: "https://mieweb.org/terms",
                         },
                     ],
                 },
@@ -80,30 +157,17 @@ const config: Config = {
                     title: "Community",
                     items: [
                         {
-                            label: "Stack Overflow",
-                            href: "https://stackoverflow.com/questions/tagged/docusaurus",
+                            label: "LinkedIn",
+                            href: "https://www.linkedin.com/company/medical-informatics-engineering-careers/",
                         },
                         {
-                            label: "Discord",
-                            href: "https://discordapp.com/invite/docusaurus",
-                        },
-                        {
-                            label: "X",
-                            href: "https://x.com/docusaurus",
-                        },
-                    ],
-                },
-                {
-                    title: "More",
-                    items: [
-                        {
-                            label: "GitHub",
-                            href: "https://github.com/maxklema/mie-opensource-landing",
-                        },
-                    ],
-                },
+                            label: "Facebook",
+                            href: "https://facebook.com/mieweb",
+                        }
+                    ]
+                }
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+            copyright: `Medical Informatics Engineering, LLC. Built with Docusaurus.`,
         },
         prism: {
             theme: prismThemes.github,
