@@ -79,9 +79,9 @@ export default function ProjectGrid({ ProjectList, itemsPerPage }: ProjectGridPr
                     return {
                         name: project,
                         description: data.description || "No description available",
-                        author: data.user || "Unknown",
+                        author: data.owner || "Unknown",
                         projectURL: `https://${project}.opensource.mieweb.org`,
-                        gitHubURL: "https://github.com/mieweb"
+                        gitHubURL: data.github_url
                     };
                 });
 
@@ -193,9 +193,11 @@ function ProjectGridClient({ projectDetails, itemsPerPage }: { projectDetails: P
                                 <h3 className={styles.projectName}>{project.name}</h3>
                                 <p className={styles.projectAuthor}>{project.author}</p>
                             </div>
-                            <Link to={"https://github.com/mieweb"} style={{ textDecoration: 'none' }}>
-                                <GrGithub size={24} color={theme === 'dark' ? 'white' : 'black'} />
-                            </Link>
+                            {project.gitHubURL && project.gitHubURL !== "" &&
+                                <Link to={project.gitHubURL} style={{ textDecoration: 'none' }}>
+                                    <GrGithub size={24} color={theme === 'dark' ? 'white' : 'black'} />
+                                </Link>
+                            }
                         </div>
                         <p className={styles.projectDescription}>{project.description}</p>
                         <Link to={project.projectURL} style={{ textDecoration: 'none' }}>

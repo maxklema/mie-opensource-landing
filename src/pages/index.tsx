@@ -9,9 +9,6 @@ import Heading from "@theme/Heading";
 import Link from "@docusaurus/Link";
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { github } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import NavButton from "../components/NavButton";
-import { Button } from "@vaadin/react-components/Button.js";
-import { Icon } from "@vaadin/react-components/Icon.js";
 
 function HomepageHeader() {
     return (
@@ -48,7 +45,7 @@ function HomepageHeader() {
     );
 }
 
-function DocumentationHighlites({ DiCode, GrCpu, GrCheckmark, GrCube }: { DiCode: any, GrCpu: any, GrCheckmark: any, GrCube: any }) {
+function DocumentationHighlites({ DiCode, GrCpu, GrCheckmark, GrCube, Button, Icon }: { DiCode: any, GrCpu: any, GrCheckmark: any, GrCube: any, Button: any, Icon: any }) {
     return (
         <div className={styles.documentationHighlightsParent}>
             <div className={styles.docGridOverlay}></div>
@@ -370,6 +367,7 @@ export default function Home(): ReactNode {
                         const { FaCheckCircle } = require("react-icons/fa");
                         const { FaComments } = require("react-icons/fa");
                         const { Snippet } = require("@heroui/snippet");
+                        
                         require('@vaadin/icons');
                         
                         return (
@@ -392,7 +390,7 @@ export default function Home(): ReactNode {
                                         </Button>
                                     </Link>
                                 </div>
-                                <DocumentationHighlites DiCode={DiCode} GrCpu={GrCpu} GrCheckmark={GrCheckmark} GrCube={GrCube} />
+                                <DocumentationHighlites DiCode={DiCode} GrCpu={GrCpu} GrCheckmark={GrCheckmark} GrCube={GrCube} Button={Button} Icon={Icon} />
                             </>
                         );
                     }}
