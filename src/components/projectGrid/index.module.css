@@ -79,7 +79,7 @@
 
 .pageLink {
     display: block;
-    padding: 0.5rem 0.75rem;
+    padding: 0.25rem 0.65rem 0.25rem 0.65rem;
     color: var(--ifm-color-primary);
     text-decoration: none;
     border: 0.5px solid var(--ifm-color-primary-light);
@@ -112,7 +112,7 @@
 .TextField {
      --vaadin-input-field-background: var(--ifm-color-gray-200) !important;
      --vaadin-input-field-border-radius: 15px !important;
-    width: 15vw;
+    width: 300px;
     margin-bottom: 2rem;
 }
 

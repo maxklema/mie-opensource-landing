@@ -12,12 +12,16 @@ To begin using the MIE Opensource Proxmox Cluster, you'll need:
 
 ### Prerequisites
 
-- **Valid Proxmox Account**: You must have an active account at [https://opensource.mieweb.org:8006](https://opensource.mieweb.org:8006)
+- **Valid Proxmox Account**: You must have an active PVE account at [https://opensource.mieweb.org:8006](https://opensource.mieweb.org:8006)
 - Basic understanding of virtualization concepts
 - SSH client for remote access to containers
 
 :::tip Access Required
 If you don't have an account yet, please contact the MIE team to request access to the opensource Proxmox cluster.
+:::
+
+:::important Important
+When logging into [https://opensource.mieweb.org:8006](https://opensource.mieweb.org:8006), make sure you are logging in with the PVE Realm.
 :::
 
 ## What You Can Do
@@ -60,7 +64,7 @@ Connect VSCode directly to your containers for seamless remote development with 
 ## Getting Access
 
 1. **Login to Proxmox**: Navigate to [https://opensource.mieweb.org:8006](https://opensource.mieweb.org:8006)
-2. **Use your credentials**: Login with your provided username and password
+2. **Use your credentials**: Login with your provided username and password and **select the PVE Realm**.
 3. **Explore the interface**: Familiarize yourself with the Proxmox web interface
 4. **Start building**: Create your first container
 
