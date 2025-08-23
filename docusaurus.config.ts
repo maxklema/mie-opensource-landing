@@ -52,13 +52,18 @@ const config: Config = {
             },
             items: [
                 {
-                    to: "/projects",
-                    label: "Projects",
+                    to: "https://create-a-container.opensource.mieweb.org",
+                    label: "Create a Container",
                     position: "left",
                 },
                 {
-                    to: "https://create-a-container.opensource.mieweb.org",
-                    label: "Create a Container",
+                    to: "https://github.com/marketplace/actions/proxmox-launchpad",
+                    label: "Proxmox Launchpad",
+                    position: "left",
+                },
+                {
+                    to: "/projects",
+                    label: "Projects",
                     position: "left",
                 },
                 {
